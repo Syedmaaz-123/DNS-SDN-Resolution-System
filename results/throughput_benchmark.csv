@@ -1,0 +1,5 @@
+concurrency_threads,queries_attempted,duration_sec,queries_per_sec,avg_latency_ms
+1,100,0.003,38877.74,0.017
+5,100,0.003,29336.98,0.126
+10,100,0.005,19052.76,0.39
+20,100,0.006,15924.52,0.852

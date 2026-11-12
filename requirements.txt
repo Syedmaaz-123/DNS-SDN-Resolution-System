@@ -1,0 +1,10 @@
+# Core Python Dependencies for DNS-SDN Resolution System
+pytest>=8.0.0
+matplotlib>=3.8.0
+pandas>=2.0.0
+streamlit>=1.30.0
+
+# SDN Controller Framework (for Ubuntu / Linux)
+# Note: os-ken is the actively maintained, Python 3.10+ compatible implementation of Ryu.
+# If running on macOS or without raw OpenFlow C-extensions, the built-in standalone controller engine runs seamlessly.
+os-ken>=2.7.0; sys_platform == 'linux'

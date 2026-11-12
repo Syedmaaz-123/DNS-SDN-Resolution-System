@@ -1,0 +1,12 @@
+{
+  "server1.local": "192.0.2.10",
+  "server2.local": "192.0.2.20",
+  "printer.local": "192.0.2.30",
+  "database.local": "192.0.2.40",
+  "college.local": "192.0.2.50",
+  "web.local": "192.0.2.60",
+  "mail.local": "192.0.2.70",
+  "gateway.local": "192.0.2.1",
+  "vpn.local": "192.0.2.80",
+  "api.local": "192.0.2.90"
+}

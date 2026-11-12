@@ -1,0 +1,3 @@
+resolver_name,status,availability_percent,packet_loss_percent,probes_count
+Resolver A,ONLINE,100.0,0.0,1
+Resolver B,ONLINE,100.0,0.0,1

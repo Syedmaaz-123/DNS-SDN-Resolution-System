@@ -1,0 +1,100 @@
+{
+  "project_name": "DNS-SDN-Resolution-System",
+  "version": "2.0.0",
+  "client": {
+    "default_timeout_sec": 2.0,
+    "max_retries": 2,
+    "interactive": true,
+    "log_file": "logs/client.log"
+  },
+  "resolvers": {
+    "Resolver A": {
+      "id": "resolver_a",
+      "ip": "10.0.0.20",
+      "local_ip": "127.0.0.1",
+      "port": 5000,
+      "priority": 1,
+      "log_file": "logs/resolver_a.log"
+    },
+    "Resolver B": {
+      "id": "resolver_b",
+      "ip": "10.0.0.30",
+      "local_ip": "127.0.0.1",
+      "port": 5001,
+      "priority": 2,
+      "log_file": "logs/resolver_b.log"
+    }
+  },
+  "dns_records_file": "resolver/dns_records.json",
+  "cache": {
+    "positive_ttl_sec": 100,
+    "negative_ttl_sec": 30,
+    "max_entries": 1000
+  },
+  "health_monitor": {
+    "check_interval_sec": 3.0,
+    "timeout_sec": 1.5,
+    "failure_threshold": 2,
+    "recovery_threshold": 2,
+    "status_file": "monitoring/health_status.json",
+    "log_file": "logs/health_monitor.log"
+  },
+  "load_balancing": {
+    "default_policy": "lowest_latency",
+    "available_policies": [
+      "lowest_latency",
+      "round_robin",
+      "priority",
+      "random"
+    ],
+    "stale_health_threshold_sec": 15.0
+  },
+  "mininet": {
+    "switch": "s1",
+    "hosts": {
+      "h1": {
+        "role": "client",
+        "ip": "10.0.0.10/24",
+        "mac": "00:00:00:00:00:01",
+        "switch_port": 1
+      },
+      "h2": {
+        "role": "resolver_a",
+        "ip": "10.0.0.20/24",
+        "mac": "00:00:00:00:00:02",
+        "service_port": 5000,
+        "switch_port": 2
+      },
+      "h3": {
+        "role": "resolver_b",
+        "ip": "10.0.0.30/24",
+        "mac": "00:00:00:00:00:03",
+        "service_port": 5001,
+        "switch_port": 3
+      }
+    },
+    "controller": {
+      "ip": "127.0.0.1",
+      "port": 6653,
+      "protocol": "OpenFlow13"
+    }
+  },
+  "sdn": {
+    "openflow_version": "OpenFlow13",
+    "controller_port": 6653,
+    "idle_timeout_sec": 30,
+    "hard_timeout_sec": 60,
+    "dns_udp_ports": [5000, 5001, 53],
+    "stats_poll_interval_sec": 5.0,
+    "stats_file": "sdn/sdn_stats.json",
+    "log_file": "logs/sdn_controller.log"
+  },
+  "results": {
+    "output_dir": "results",
+    "benchmark_log": "results/benchmark_summary.json"
+  },
+  "logging": {
+    "level": "INFO",
+    "format": "%(asctime)s [%(levelname)s] %(name)s: %(message)s"
+  }
+}

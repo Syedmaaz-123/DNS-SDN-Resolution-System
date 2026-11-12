@@ -1,0 +1,40 @@
+{
+    "updated_at": 1794465938.889279,
+    "updated_at_iso": "2026-11-12T12:15:38.889281",
+    "servers": {
+        "Resolver A": {
+            "name": "Resolver A",
+            "ip": "127.0.0.1",
+            "port": 5000,
+            "online": true,
+            "latency_ms": 0.318,
+            "consecutive_failures": 0,
+            "consecutive_successes": 1,
+            "total_probes": 1,
+            "successful_probes": 1,
+            "packet_loss_percent": 0.0,
+            "last_seen": 1794465938.889684,
+            "last_checked": 1794465938.889295,
+            "recent_latencies": [
+                0.318
+            ]
+        },
+        "Resolver B": {
+            "name": "Resolver B",
+            "ip": "127.0.0.1",
+            "port": 5001,
+            "online": true,
+            "latency_ms": 0.146,
+            "consecutive_failures": 0,
+            "consecutive_successes": 1,
+            "total_probes": 1,
+            "successful_probes": 1,
+            "packet_loss_percent": 0.0,
+            "last_seen": 1794465938.889861,
+            "last_checked": 1794465938.8896909,
+            "recent_latencies": [
+                0.146
+            ]
+        }
+    }
+}

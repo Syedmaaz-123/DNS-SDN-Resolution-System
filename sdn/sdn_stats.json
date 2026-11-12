@@ -1,0 +1,35 @@
+{
+    "timestamp": 1794465938.8907871,
+    "active_resolver": "Resolver A",
+    "active_resolver_port": 2,
+    "port_statistics": {
+        "1": {
+            "rx_packets": 10,
+            "tx_packets": 10,
+            "rx_bytes": 640,
+            "tx_bytes": 640,
+            "name": "h1-client",
+            "last_updated": 1794465938.890784
+        },
+        "2": {
+            "rx_packets": 0,
+            "tx_packets": 0,
+            "rx_bytes": 0,
+            "tx_bytes": 0,
+            "name": "h2-resolver-a"
+        },
+        "3": {
+            "rx_packets": 0,
+            "tx_packets": 0,
+            "rx_bytes": 0,
+            "tx_bytes": 0,
+            "name": "h3-resolver-b"
+        }
+    },
+    "traffic_distribution_percent": {
+        "Resolver A": 50.0,
+        "Resolver B": 50.0
+    },
+    "installed_flows_count": 0,
+    "congestion_detected": false
+}

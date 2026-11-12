@@ -1,0 +1,91 @@
+{
+    "latency": {
+        "samples": 50,
+        "resolver_a_avg_ms": 0.194,
+        "resolver_a_min_ms": 0.111,
+        "resolver_a_max_ms": 1.138,
+        "resolver_b_avg_ms": 0.185,
+        "resolver_b_min_ms": 0.109,
+        "resolver_b_max_ms": 0.455,
+        "csv_file": "/Users/syedmaaz/pes/CN/projrct/new /results/latency_comparison.csv"
+    },
+    "cache": {
+        "samples": 50,
+        "avg_cache_miss_ms": 0.196,
+        "avg_cache_hit_ms": 0.001,
+        "speedup_factor_x": 132.5,
+        "csv_file": "/Users/syedmaaz/pes/CN/projrct/new /results/cache_performance.csv"
+    },
+    "failover": {
+        "total_queries": 30,
+        "normal_phase_avg_ms": 1.221,
+        "failover_phase_avg_ms": 1.422,
+        "recovered_phase_avg_ms": 0.755,
+        "csv_file": "/Users/syedmaaz/pes/CN/projrct/new /results/failover_timeline.csv"
+    },
+    "throughput": {
+        "threads_1": {
+            "threads": 1,
+            "qps": 38877.74,
+            "duration_sec": 0.003,
+            "avg_latency_ms": 0.017
+        },
+        "threads_5": {
+            "threads": 5,
+            "qps": 29336.98,
+            "duration_sec": 0.003,
+            "avg_latency_ms": 0.126
+        },
+        "threads_10": {
+            "threads": 10,
+            "qps": 19052.76,
+            "duration_sec": 0.005,
+            "avg_latency_ms": 0.39
+        },
+        "threads_20": {
+            "threads": 20,
+            "qps": 15924.52,
+            "duration_sec": 0.006,
+            "avg_latency_ms": 0.852
+        }
+    },
+    "availability": {
+        "status": "AUDITED",
+        "servers": {
+            "Resolver A": {
+                "name": "Resolver A",
+                "ip": "127.0.0.1",
+                "port": 5000,
+                "online": true,
+                "latency_ms": 0.339,
+                "consecutive_failures": 0,
+                "consecutive_successes": 1,
+                "total_probes": 1,
+                "successful_probes": 1,
+                "packet_loss_percent": 0.0,
+                "last_seen": 1794464907.980282,
+                "last_checked": 1794464907.979894,
+                "recent_latencies": [
+                    0.339
+                ]
+            },
+            "Resolver B": {
+                "name": "Resolver B",
+                "ip": "127.0.0.1",
+                "port": 5001,
+                "online": true,
+                "latency_ms": 0.192,
+                "consecutive_failures": 0,
+                "consecutive_successes": 1,
+                "total_probes": 1,
+                "successful_probes": 1,
+                "packet_loss_percent": 0.0,
+                "last_seen": 1794464907.9804952,
+                "last_checked": 1794464907.980288,
+                "recent_latencies": [
+                    0.192
+                ]
+            }
+        }
+    }
+}
