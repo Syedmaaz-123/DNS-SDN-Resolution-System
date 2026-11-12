@@ -55,3 +55,4 @@ def test_client_resolution_workflow(get_free_port):
     finally:
         srv_a.stop()
         srv_b.stop()
+

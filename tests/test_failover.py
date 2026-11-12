@@ -63,3 +63,4 @@ def test_automatic_failover_and_recovery():
 
     finally:
         srv_b.stop()
+

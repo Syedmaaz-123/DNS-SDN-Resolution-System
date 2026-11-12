@@ -58,3 +58,4 @@ The following core algorithmic choices from the author's original project have b
 2. **Concurrency Model:** ThreadPoolExecutor in resolvers to handle multiple incoming client queries concurrently.
 3. **Atomic File Updates:** Writing to temporary file and using `os.replace` to prevent race conditions during concurrent reads by client or controller.
 4. **Cache Invalidation Semantics:** Monotonic timestamp expiration with TTL check before returning data.
+

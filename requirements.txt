@@ -8,3 +8,4 @@ streamlit>=1.30.0
 # Note: os-ken is the actively maintained, Python 3.10+ compatible implementation of Ryu.
 # If running on macOS or without raw OpenFlow C-extensions, the built-in standalone controller engine runs seamlessly.
 os-ken>=2.7.0; sys_platform == 'linux'
+

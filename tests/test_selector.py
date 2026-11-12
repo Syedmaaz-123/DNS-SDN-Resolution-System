@@ -66,3 +66,4 @@ def test_stale_health_fallback():
     primary, order, _ = selector.select_resolver(policy="priority", use_local_ip=True)
     # Under priority, Resolver A is rank 1
     assert primary["name"] == "Resolver A"
+

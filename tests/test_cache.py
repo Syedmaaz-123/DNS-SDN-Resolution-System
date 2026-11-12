@@ -102,3 +102,4 @@ def test_cache_capacity_and_eviction():
     stats = cache.get_stats()
     assert stats["active_entries"] <= 3
     assert stats["evictions"] >= 1
+

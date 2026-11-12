@@ -36,3 +36,4 @@ fi
 
 echo "All DNS-SDN background processes have been terminated."
 echo "================================================================="
+

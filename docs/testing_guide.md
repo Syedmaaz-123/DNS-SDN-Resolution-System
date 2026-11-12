@@ -123,3 +123,4 @@ tests/test_selector.py::test_stale_health_fallback PASSED                [100%]
 - **Procedure:** Run `pytest tests/test_integration.py -v`.
 - **Expected Outcome:** All 12 scenarios pass in a unified test run.
 - **Pass Condition:** Test session completes with zero failures.
+

@@ -207,3 +207,4 @@ $$\text{QPS} = \frac{\text{Total Queries Completed}}{\text{Wall Clock Elapsed Se
 2. Migrating to DNS-over-HTTPS (DoH) or DNS-over-TLS (DoT).
 3. Integrating machine-learning-based predictive latency routing.
 4. Expanding to multi-switch fat-tree data center topologies.
+

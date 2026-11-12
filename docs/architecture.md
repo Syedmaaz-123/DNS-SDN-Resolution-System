@@ -200,3 +200,4 @@ In classical networking, name resolution and routing are decoupled. This project
    - **Mechanism:** Open vSwitch inspects incoming packet headers (`eth_type=0x0800`, `ip_proto=17`, `udp_dst=5000/5001`).
    - **Control Variables:** OpenFlow 1.3 match-action tables pushed by the Ryu/OS-Ken controller.
    - **Advantage:** The SDN controller can dynamically rewrite packet destination addresses or redirect forwarding ports directly at switch hardware line rate, providing transparent failover and network-enforced load balancing without modifying end-host application code!
+

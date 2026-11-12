@@ -200,3 +200,4 @@ class DNSCache:
                         "hits": entry.hits
                     }
             return result
+

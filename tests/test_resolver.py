@@ -84,3 +84,4 @@ def test_resolver_concurrent_queries(get_free_port):
     srv.stop()
     assert len(results) == 10
     assert all(r == "OK 192.0.2.10" for r in results)
+

@@ -59,3 +59,4 @@ echo "================================================================="
 echo "  Installation Complete!                                         "
 echo "  Run './scripts/start_project.sh' to launch services.           "
 echo "================================================================="
+

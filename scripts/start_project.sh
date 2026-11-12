@@ -62,3 +62,4 @@ echo ""
 echo "  To stop all services:"
 echo "    ./scripts/stop_project.sh"
 echo "================================================================="
+
