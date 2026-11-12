@@ -16,6 +16,53 @@ This project upgrades and transforms a baseline UDP name resolution prototype in
 
 ---
 
+## ⚡ Quick Start: How to Run in 60 Seconds
+
+> 📘 **Looking for full step-by-step instructions?** See **[HOW_TO_RUN.md](HOW_TO_RUN.md)** or **[docs/execution_guide.md](docs/execution_guide.md)** for a detailed 21-step academic walkthrough.
+
+### Option A: Local Process Mode (Works on macOS & Linux without Root)
+```bash
+# 1. Start all services in the background (Controller, Resolvers, Health Monitor)
+./scripts/start_project.sh
+
+# 2. Run the interactive DNS client
+python3 client/client.py --local
+
+# 3. (Optional) Open the live web telemetry dashboard
+streamlit run dashboard/app.py
+
+# 4. Stop all background services when done
+./scripts/stop_project.sh
+```
+
+### Option B: Mininet & SDN OpenFlow 1.3 Emulation (Ubuntu Linux)
+```bash
+# Terminal 1: Launch SDN Controller (TCP Port 6653)
+python3 sdn/sdn_controller.py --standalone
+# (Or: osken-manager sdn/sdn_controller.py)
+
+# Terminal 2: Launch Mininet Topology & Auto-Start Resolvers
+sudo python3 mininet/mininet_topology.py --auto-start
+
+# Inside the Mininet CLI:
+mininet> h1 python3 client/client.py --hostname server1.local          # First query (Cache Miss)
+mininet> h1 python3 client/client.py --hostname server1.local          # Repeat query (Cache Hit < 0.05 ms)
+mininet> h2 pkill -f resolver.py                                       # Simulate Resolver A failure
+mininet> h1 python3 client/client.py --hostname database.local         # Automatic failover to Resolver B!
+mininet> exit
+```
+
+### Running Automated Tests & Performance Benchmarks
+```bash
+# Run all 25 automated unit and integration tests (100% passing):
+pytest tests/ -v
+
+# Run performance benchmarks and generate 6 Matplotlib charts in results/:
+./scripts/run_benchmarks.sh
+```
+
+---
+
 ## 2. Problem Statement & Limitations of Baseline Codebase
 
 The baseline repository (`https://github.com/pranav2006s/DNS-SDN-Resolution-System`) contained rudimentary UDP scripts with substantial architectural gaps:
