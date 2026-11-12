@@ -305,8 +305,9 @@ class StandaloneOpenFlow13Controller:
                 logger.info("Switch connection established from %s", addr)
                 ct = threading.Thread(target=self._handle_switch, args=(client_sock, addr), daemon=True)
                 ct.start()
-        except KeyboardInterrupt:
-            print("\nShutting down Standalone SDN Controller...")
+        except (KeyboardInterrupt, OSError):
+            if self.running:
+                logger.info("SDN Controller shutting down...")
         finally:
             self.stop()
 

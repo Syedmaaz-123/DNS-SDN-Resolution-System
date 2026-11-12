@@ -128,3 +128,4 @@ View the generated charts in the `results/` folder:
 | **Mininet network already exists** | Run `sudo mn -c` |
 | **Permission denied on scripts** | Run `chmod +x scripts/*.sh` |
 | **Health file stale warning** | Ensure `monitoring/health_monitor.py` is running |
+

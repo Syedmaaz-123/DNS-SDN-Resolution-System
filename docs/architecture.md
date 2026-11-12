@@ -1,8 +1,8 @@
 # System Architecture & Technical Design Specification
 
-**Project Title:** DNS-SDN Resolution System: Intelligent DNS-like Resolution with Multiple Resolvers, Dynamic Load Balancing, Fault Tolerance and SDN-Controlled Network Forwarding  
-**Version:** 2.0.0 (Academic Edition)  
-**Standard:** OpenFlow 1.3 / IEEE UDP DNS Model  
+**Project Title:** DNS-SDN Resolution System: Intelligent DNS-like Resolution with Multiple Resolvers, Dynamic Load Balancing, Fault Tolerance and SDN-Controlled Network Forwarding
+**Version:** 2.0.0 (Academic Edition)
+**Standard:** OpenFlow 1.3 / IEEE UDP DNS Model
 
 ---
 
@@ -66,19 +66,19 @@ graph TD
 
 ### Addressing Schema
 
-| Node | Interface | IP Address | MAC Address | Role | Switch Port |
-|---|---|---|---|---|---|
-| **h1** | `h1-eth0` | `10.0.0.10/24` | `00:00:00:00:00:01` | DNS Resolution Client | Port 1 |
-| **h2** | `h2-eth0` | `10.0.0.20/24` | `00:00:00:00:00:02` | Resolver Server A | Port 2 |
-| **h3** | `h3-eth0` | `10.0.0.30/24` | `00:00:00:00:00:03` | Resolver Server B | Port 3 |
-| **s1** | `s1-eth[1-3]`| None (L2/L3) | Virtual DPID `0000000000000001` | OpenFlow 1.3 Switch | - |
-| **c0** | Remote | `127.0.0.1:6653` | N/A | Ryu / OS-Ken Controller | - |
+| Node         | Interface       | IP Address         | MAC Address                       | Role                    | Switch Port |
+| ------------ | --------------- | ------------------ | --------------------------------- | ----------------------- | ----------- |
+| **h1** | `h1-eth0`     | `10.0.0.10/24`   | `00:00:00:00:00:01`             | DNS Resolution Client   | Port 1      |
+| **h2** | `h2-eth0`     | `10.0.0.20/24`   | `00:00:00:00:00:02`             | Resolver Server A       | Port 2      |
+| **h3** | `h3-eth0`     | `10.0.0.30/24`   | `00:00:00:00:00:03`             | Resolver Server B       | Port 3      |
+| **s1** | `s1-eth[1-3]` | None (L2/L3)       | Virtual DPID `0000000000000001` | OpenFlow 1.3 Switch     | -           |
+| **c0** | Remote          | `127.0.0.1:6653` | N/A                               | Ryu / OS-Ken Controller | -           |
 
 ---
 
 ## 3. Communication Workflows
 
-### 3.1 Client Resolution Workflow (with Caching & Load Balancing)
+# 3.1 Client Resolution Workflow (with Caching & Load Balancing)
 
 ```mermaid
 sequenceDiagram
@@ -104,7 +104,7 @@ sequenceDiagram
         Selector->>HM: Read health_status.json
         HM-->>Selector: Server health, latency, & availability
         Selector-->>Client: Selected: Resolver A (Lowest Latency 1.25 ms)
-        
+      
         Client->>SrvA: UDP: RESOLVE server1.local
         alt Resolver A Responds OK
             SrvA-->>Client: UDP: OK 192.0.2.10
@@ -165,7 +165,7 @@ sequenceDiagram
 
     Switch->>Controller: OFPFeaturesReply (Switch Connected)
     Controller->>Switch: OFPFlowMod (Priority 0: Table-Miss -> Send to Controller)
-    
+  
     loop Dynamic Telemetry & Failover Loop (Every 5s)
         Controller->>Health: Inspect Resolver Health
         alt Resolver A is Healthy
@@ -190,14 +190,14 @@ sequenceDiagram
 In classical networking, name resolution and routing are decoupled. This project demonstrates how Software-Defined Networking integrates them:
 
 1. **Application-Level Selection (Client Tier):**
+
    - **Layer:** OSI Layer 7 (Application).
    - **Mechanism:** The client socket application actively chooses whether to send a packet to socket `10.0.0.20:5000` or `10.0.0.30:5001`.
    - **Control Variables:** In-memory caching, user-specified balancing policies (`lowest_latency`, `round_robin`), and reading `health_status.json`.
    - **Limitation:** If a client application has no built-in failover, a server outage halts queries entirely.
-
 2. **Network-Level Forwarding (SDN Control & Data Tier):**
+
    - **Layer:** OSI Layer 2 (Data Link), Layer 3 (Network), and Layer 4 (Transport).
    - **Mechanism:** Open vSwitch inspects incoming packet headers (`eth_type=0x0800`, `ip_proto=17`, `udp_dst=5000/5001`).
    - **Control Variables:** OpenFlow 1.3 match-action tables pushed by the Ryu/OS-Ken controller.
    - **Advantage:** The SDN controller can dynamically rewrite packet destination addresses or redirect forwarding ports directly at switch hardware line rate, providing transparent failover and network-enforced load balancing without modifying end-host application code!
-

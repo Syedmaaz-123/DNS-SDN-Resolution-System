@@ -49,10 +49,11 @@ class DNSResolutionClient:
         config_path: Optional[str] = None,
         use_local_ip: bool = False,
         policy: Optional[str] = None,
-        timeout: float = 2.0
+        timeout: float = 2.0,
+        config: Optional[Dict[str, Any]] = None
     ):
         self.config_path = config_path or str(PROJECT_ROOT / "config" / "config.json")
-        self.selector = ResolverSelector(config_path=self.config_path)
+        self.selector = ResolverSelector(config=config, config_path=self.config_path)
         self.use_local_ip = use_local_ip
         self.policy = policy or self.selector.default_policy
         self.timeout = timeout

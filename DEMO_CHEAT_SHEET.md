@@ -95,3 +95,4 @@ Follow these 5 steps in order during your evaluation:
    In another terminal, stop Resolver A: `pkill -f "port 5000"`.  
    In client, type: `college.local`.  
    *Point out:* Client automatically detects timeout and **fails over to Resolver B** with zero interruption!
+
