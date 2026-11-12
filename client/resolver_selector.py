@@ -140,6 +140,12 @@ class ResolverSelector:
             primary = ordered_servers[0]
             return primary, ordered_servers, explanation
 
+        # If any server is offline, prepend an explicit health alert notice
+        health_alert = ""
+        if unhealthy_candidates:
+            offline_names = ", ".join(s["name"] for s in unhealthy_candidates)
+            health_alert = f"⚠️ [HEALTH ALERT: {offline_names} is OFFLINE - excluded] "
+
         # Apply selection policy to healthy servers
         if effective_policy == "lowest_latency":
             # Sort healthy servers by latency ascending; None latencies placed at the end
@@ -151,7 +157,7 @@ class ResolverSelector:
             primary = healthy_candidates[0]
             lat_str = f"{primary['latency_ms']:.2f} ms" if primary.get("latency_ms") is not None else "unknown ms"
             explanation = (
-                f"Selected {primary['name']} ({primary['ip']}:{primary['port']}) "
+                f"{health_alert}Selected {primary['name']} ({primary['ip']}:{primary['port']}) "
                 f"based on lowest measured latency ({lat_str}) under policy '{effective_policy}'."
             )
 
@@ -163,7 +169,7 @@ class ResolverSelector:
             healthy_candidates = healthy_candidates[idx:] + healthy_candidates[:idx]
             primary = healthy_candidates[0]
             explanation = (
-                f"Selected {primary['name']} ({primary['ip']}:{primary['port']}) "
+                f"{health_alert}Selected {primary['name']} ({primary['ip']}:{primary['port']}) "
                 f"via round-robin sequence (index {idx + 1}/{len(healthy_candidates)})."
             )
 
@@ -171,7 +177,7 @@ class ResolverSelector:
             healthy_candidates.sort(key=lambda s: s["priority"])
             primary = healthy_candidates[0]
             explanation = (
-                f"Selected {primary['name']} ({primary['ip']}:{primary['port']}) "
+                f"{health_alert}Selected {primary['name']} ({primary['ip']}:{primary['port']}) "
                 f"based on highest configured priority (rank {primary['priority']})."
             )
 
@@ -180,7 +186,7 @@ class ResolverSelector:
             # Put primary at front
             healthy_candidates.remove(primary)
             healthy_candidates.insert(0, primary)
-            explanation = f"Selected {primary['name']} ({primary['ip']}:{primary['port']}) randomly."
+            explanation = f"{health_alert}Selected {primary['name']} ({primary['ip']}:{primary['port']}) randomly."
 
         else:
             primary = healthy_candidates[0]

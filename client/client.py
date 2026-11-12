@@ -312,7 +312,15 @@ def run_interactive_client(client: DNSResolutionClient) -> None:
             for att in res["attempts"]:
                 status_str = att.get("status", "")
                 lat = att.get("latency_ms", "N/A")
-                print(f"  Tried {att['server']} ({att['target']}) -> {status_str} ({lat} ms)")
+                if status_str == "TIMEOUT":
+                    print(f"  ❌ Tried {att['server']} ({att['target']}) -> TIMEOUT! (Triggering automatic failover...)")
+                elif status_str == "SUCCESS":
+                    print(f"  ✅ Tried {att['server']} ({att['target']}) -> SUCCESS ({lat} ms)")
+                else:
+                    print(f"  Tried {att['server']} ({att['target']}) -> {status_str} ({lat} ms)")
+
+            if res.get("failover_occurred"):
+                print("\n🚨 [FAILOVER ALERT] Primary resolver failed. Transparently redirected to backup resolver!")
 
             if res["status"] == "RESOLVED":
                 print(f"\nResolved using {res['source']}")
